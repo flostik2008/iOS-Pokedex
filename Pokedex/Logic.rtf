@@ -1,0 +1,111 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red92\green38\blue153;\red46\green13\blue110;\red196\green26\blue22;
+\red63\green110\blue116;\red170\green13\blue145;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 \expnd0\expndtw0\kerning0
+\
+0. Uploaded over 700 images + "pokemon.csv" file.\
+1. Created a model class "Pokemon". Gave it private variables, setters. Init method. \
+2. Created UI with a collection view. \
+3. For our custom cell, created a class. Set IBOutlets. Created "configureCell" method that takes info from the model object "Pokemon" and sets image and label. \
+4. Starting to set our CollectionView, in main VC. 3 delegates at the top and 5 methods: \
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+"numberOfSections"\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+"numberOfItemsInSection"\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+"cellForItemAt"\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+"didSelectItemAt"\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+"sizeForItemAt".\
+\pard\tx560\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 5. Creating a cell in "cellForItemAt" with "reusableIdentifire".\
+6. Im main VC, creating a IBOutlet for our UICollectionView. Connect it in our UI. In VC, in "viewDidLoad" set its delegate and data source.  \
+7. Creating rounded corners for our cell. Inside of the "PokeCell" - "required init?"\
+8. Creating different pokemon objects - in "cellForItemAt" with our Pokemon class and "configureCell" method. \
+9. Starting to parse the .csv file. For that, downloaded csv.swift helper file from Mark Price github. \
+10. Our VC is the dataSourse for our collectionView, hence we are creating an empty array of our pokemons (that letter will be populated)\
+11. We crate a method that will parse our .csv file: "parsePokemonCSV"\
+12. Call that method in viewDidLoad.\
+13. Inside "parsePokemonCSV" creating a path to our csv file with 
+\f1\fs28 \kerning1\expnd0\expndtw0 \CocoaLigature0 "\cf2 Bundle\cf0 .\cf2 main\cf0 .\cf3 path\cf0 (forResource: \cf4 "pokemon"\cf0 , ofType: \cf4 "csv"\cf0 )"
+\f0\fs36 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+14. Since the Path might be nil, we do a "do" block. \
+15. Insides, by using a method from Mark's file "CSV(contentsOfUrl: URL)" we get all data into "csv" variable. \
+16. The "csv" variable has property "rows". We get that too in a sep variable. \
+17.  Now we have an array called "rows", that consists of rows of pokemon. We create a "for row in rows" loop where each row will be given to a variable "row". \
+18. With each step of the loop, we access our "row" variable and extract pokemon's id and name. \
+19. with that data, we can now create our own pokemon, using our init method that we wrote. \
+20. We add newly created pokemon to our general array of pokemons (that we've created outside of the "ParsePokemonCSV")\
+21. now, in our "cellForItemAt" method, we can create a cell with actual pokemon object. We retrieve  pokemon from our array. \
+22. We just added Pokemom fonts and music. Imprted AVFoundation, created and initialized AVAudioPlayer. \
+23. Now we want to our searchBar to work. We create IBOutlet and adding it to main VC. \
+24. In main VC we add "UISearchBarDelegate"\
+25. Since, with each pressed character we will be showing a new set of Pokemons, we need to create an array that will hold that array "filteredPokemon". We also add one boolean "inSearchMode".\
+26. We list a method from UISearchBarDelegate - "searchBar( textDidChange )", everything will happen in here. \
+27. Inside we create an "If - else" check to see if "inSearchMode" is active or not. \
+28. If "true" - we grab what was typed in the search bar while making it "lowercased( )"\
+29. We create an array and put it into our "filteredPokemon" array with just one function - 
+\f1\fs28 \cf5 \kerning1\expnd0\expndtw0 \CocoaLigature0 filteredPokemon\cf0  = \cf5 pokemon\cf0 .\cf3 filter\cf0 (\{$0.\cf5 name\cf0 .\cf3 range\cf0 (of: lower) != \cf6 nil\cf0 \}) - "$0" is a placeholder for any pokemon name.  \
+
+\f0\fs36 \expnd0\expndtw0\kerning0
+\CocoaLigature1 30. We ask for "collection.reloadData( )" in both cases, if there is something in the search bar or not. \
+31.  We also need to change method "cellForItemAt" where we configure our cells. If we are "inSearchMode", we retrieve our filteredPokemon array, then run "configureCell". \
+32. We change "numberOfItemInSection" and if we are "inSearchMode" - we count "filteredPokemon" array, otherwise we count regular "pokemon" array. \
+33. Bug. We don't hide the keyboard. We have to dismiss it. In "textDidChange" when there is nothing the search bar (or we deleted everything) we enter   
+\f1\fs28 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 view\cf0 .\cf3 endEditing\cf0 (\cf6 true\cf0 )\
+
+\f0\fs36 \expnd0\expndtw0\kerning0
+\CocoaLigature1 34. We also want to hide keyboard when we press "Return". For that we pull another delegate method -
+\f1\fs28 \kerning1\expnd0\expndtw0 \CocoaLigature0  "searchBarSearchButtonClicked " 
+\f0\fs36 \expnd0\expndtw0\kerning0
+\CocoaLigature1 and inside we write 
+\f1\fs28 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 view\cf0 .\cf3 endEditing\cf0 (\cf6 true\cf0 )
+\f0\fs36 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+35. we change our keyboard "return" button to be "done"  - in our viewDidLoad we type  
+\f1\fs28 \cf5 \kerning1\expnd0\expndtw0 \CocoaLigature0 searchBar\cf0 .\cf2 returnKeyType\cf0  = \cf2 UIReturnKeyType\cf0 .\cf3 done
+\f0\fs36 \cf0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+36. Now we create a detailed view that appears when we click on any of the pokemons. In the UI we DON'T cntrl drag from the cell, instead we drag from the VC itself (yellow icon).\
+37. We create a variable of class "Pokemon", that will be passed to this VC. \
+38. Now, in main VC, we put code in the collection view method "didSelectItemAt". We want to grab a Pokemon object so we can letter pass it to DetailedVC. For that we checking if we are in search mode or not -> and therefore grabbing from the regular array or "filtered". \
+We write "perfromSegue", specify our identifier and specify "sender" as "poke" since we will be passing it to the DetailedVC\
+39. But the passing itself going to happen in the method that is called right before the segue happens "prepare (forSegue: sender: )" in the main VC. We write that method.  \
+40. Inside, we first check segue identifier, then grab an object of our VC (and cast it), then grab an object of our "sender" that is original pokemon object (cast it too) and then assign VC's variable to our original pokemon object. \
+41. (20 min video about stack views for DitailedVC). Hooking up all IBOutlets.\
+42. \
+\
+\
+\
+\
+
+\f1\fs28 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+
+\f0\fs36 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
