@@ -31,7 +31,16 @@ class PokemonDitailVC: UIViewController {
 
         nameLbl.text = pokemon.name
         self.view.backgroundColor = UIColor.white
+        
+        pokemon.downloadPokemonDetail {
+        self.updateUI()
+        
+        }
 
+    }
+    
+    func updateUI(){
+        
     }
 
     @IBAction func backBtnPressed(_ sender: AnyObject) {

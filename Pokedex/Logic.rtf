@@ -85,7 +85,19 @@ We write "perfromSegue", specify our identifier and specify "sender" as "poke" s
 40. Inside, we first check segue identifier, then grab an object of our VC (and cast it), then grab an object of our "sender" that is original pokemon object (cast it too) and then assign VC's variable to our original pokemon object. \
 41. (20 min video about stack views for DitailedVC). Declaring those IBOutlets in PokemonDetailVC. \
 42. Declaring additional properties that we just created in the "Pokemon" model file. \
-43. \
+43. Adding "Alamofire" to the project. Opening the .xcworkspace file. \
+44. Creating a new file to hold the api web-links (constants) URL_BASE and URL_POKEMON.\
+45. Now in model "Pokemon" file in our "init" method, we want to create a url for each pokemon. We add a new variable to hold that URL. Adding code to the "init" method. \
+46. We want to have a "lazy-loading" - load only info for pokemon that was just clicked. But we can't start setting labels for our PokemonDetailedVC before we get all the info. We need to let him know that data is available. For that - we will use "closures". We put it in "constants" file.\
+Closures are blocks of code that can be passed as arguments. We will pass our closure exactly as argument for the "downloadPokemonDetail" method. \
+47. Now in PokemonDetailVC in viewDidLoad we can call for our method- "pokemon.downloadPokemonDetail \{   \}" and whatever will happen in this method will be only done after the data will be available.  We will update our UI here. We create a func "updateUI( )"\
+48. We are ready to implement Alamofire. In Pokemon class, we import Alamofire, then in "downloadPokemonDetail( )" - we get the all our response data as a dictionary. 
+\f1\fs28 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+
+\f0\fs36 \expnd0\expndtw0\kerning0
+\CocoaLigature1 49. We start parsing, and get variables one by one from the main dict. \
+50. \
+\
 \
 \
 \
