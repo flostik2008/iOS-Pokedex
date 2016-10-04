@@ -7,5 +7,4 @@ An iOS 10 app, Swift 3.0, 717 Pokemons in a UICollectionView, with images, descr
 - AVAudioPlayer
 - UISearchBar
 
-
-
+(screenshots are in wiki)
