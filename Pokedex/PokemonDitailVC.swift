@@ -32,10 +32,19 @@ class PokemonDitailVC: UIViewController {
         nameLbl.text = pokemon.name
         self.view.backgroundColor = UIColor.white
         
+        let img = UIImage(named: "\(pokemon.pokedexId)")
+        mainImg.image = img
+        currentEvoImg.image = img
+        pokedexLbl.text = "\(pokemon.pokedexId)"
+        
+        
         pokemon.downloadPokemonDetail {
 
             self.updateUI()
         }
+        
+        
+        
     }
     
     func updateUI(){
@@ -43,6 +52,19 @@ class PokemonDitailVC: UIViewController {
         defenseLbl.text = pokemon.defense
         heightLbl.text = pokemon.height
         weightlbl.text = pokemon.weight
+        typeLbl.text = pokemon.type
+        descriptionLbl.text = pokemon.description
+        
+        if pokemon.nextEvolutionId == "" {
+            evoLbl.text = "No Evolution"
+            nextEvoImg.isHidden = true
+        } else {
+            nextEvoImg.isHidden = false
+            nextEvoImg.image = UIImage(named: pokemon.nextEvolutionId)
+            let str = "Next Evolution: \(pokemon.nextEvolutionName) - LVL \(pokemon.nextEvolutionLevel)"
+            evoLbl.text = str 
+        }
+        
     }
 
     @IBAction func backBtnPressed(_ sender: AnyObject) {

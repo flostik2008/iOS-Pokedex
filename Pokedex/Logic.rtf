@@ -1,7 +1,8 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
-{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;}
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;\f2\fswiss\fcharset0 Helvetica;
+}
 {\colortbl;\red255\green255\blue255;\red92\green38\blue153;\red46\green13\blue110;\red196\green26\blue22;
-\red63\green110\blue116;\red170\green13\blue145;}
+\red63\green110\blue116;\red170\green13\blue145;\red29\green38\blue42;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
 {\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
@@ -88,6 +89,7 @@ We write "perfromSegue", specify our identifier and specify "sender" as "poke" s
 43. Adding "Alamofire" to the project. Opening the .xcworkspace file. \
 44. Creating a new file to hold the api web-links (constants) URL_BASE and URL_POKEMON.\
 45. Now in model "Pokemon" file in our "init" method, we want to create a url for each pokemon. We add a new variable to hold that URL. Adding code to the "init" method. \
+So for each pokemon, we will have its own API link.  \
 46. We want to have a "lazy-loading" - load only info for pokemon that was just clicked. But we can't start setting labels for our PokemonDetailedVC before we get all the info. We need to let him know that data is available. For that - we will use "closures". We put it in "constants" file.\
 Closures are blocks of code that can be passed as arguments. We will pass our closure exactly as argument for the "downloadPokemonDetail" method. \
 47. Now in PokemonDetailVC in viewDidLoad we can call for our method- "pokemon.downloadPokemonDetail \{   \}" and whatever will happen in this method will be only done after the data will be available.  We will update our UI here. We create a func "updateUI( )"\
@@ -99,8 +101,34 @@ Closures are blocks of code that can be passed as arguments. We will pass our cl
 50. Finishing setting up all the pokemon variables by writing "getters/setters" where we also check so we never return a "nil" (that will result in app crush). \
 51. At the end of the "downloadPokemonDitail" func, after parsing the JSON dictionary, we write "completed( )"\
 52. We update the UI in the "updateUI ( )" method. \
-53. \
-54. \
+53. Setting main and evolve images. Updating the index. \
+54. Now we need to extract "types" from our main API dictionary. When we look at it, we see that a value for key "types" - arrays with dictionaries. so we have to cast "as? [Dictionary<String, String>]"\
+We also have to make sure that we have at least 1 type, so we put " , types.count > 0 " \
+55. Now, before we would just use the keyword that we need, but here we have an array => we just take the first element of the array and inside we will look for attribute name: "types[0]["name"]"\
+56. We might have more than one name => test with "if" statement. Then a "for" loop. Additional names add up after "/" sign. Index variable "x" will go through arrays one by one. "types[x]...". \
+Since we have the type, we update the UI. \
+57. Two things left - the description and evolution image. \
+Unfortunately, description - is in another URL. \
+We have to create a new URL, get a new JSON response, and then parse it. \
+The link for a new api call:    
+\f1\fs28 \cf4 \kerning1\expnd0\expndtw0 \CocoaLigature0 http://pokeapi.co/api/v2/characteristic/\{id\}
+\f2\fs48 \cf7 \expnd0\expndtw0\kerning0
+\CocoaLigature1  \
+----\
+
+\f0\fs36 \cf0 We don't need to do this, because "descriptions" still exist in "v1" of api. \
+We are getting into "descriptions" key in the main dict. In there, we have a url that contains different descriptions. So after extracting that url, we will construct a new API parsing call. \
+Getting a new dictionary our of "response.result.value" casting it as "Dictionary<String, AnyObject>". Getting the description out. \
+58. For some reason, in the description we have "POKMON" instead of "pokemon". Changing it. \
+59. If there is not description at all, make it an empty string. \
+60. Don't forget the "completed( )" for the second Alamofire API call. Should go witin the "completionHandler" curly braces. \
+61. Evolution. Extracting array of dictionaries. \
+62. Excluding evolution names with "mega" in it. \
+63. (for some reason adding 3 new properties - nextEvolutionName, nextEvolutionID, nextEvolutionLevel. Adding computed properties/accessors.) - need this for our DetailVC UI. \
+64. Setting the _nextEvolutionName of our pokemon. \
+65. Extracting id for the next evolution, out of the link.  Striping the link with ".replacingOccurrences". Setting the "nextEvolutionId"\
+66. \
+\
 \
 \
 \
